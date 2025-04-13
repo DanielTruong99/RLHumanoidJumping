@@ -1,11 +1,11 @@
-from omni.isaac.lab.terrains.terrain_generator_cfg import SubTerrainBaseCfg
-from omni.isaac.lab.terrains.height_field.hf_terrains_cfg import HfRandomUniformTerrainCfg
+from isaaclab.terrains.terrain_generator_cfg import SubTerrainBaseCfg
+from isaaclab.terrains.height_field.hf_terrains_cfg import HfRandomUniformTerrainCfg
 from dataclasses import MISSING
 from typing import Literal
 
-import omni.isaac.lab.terrains.trimesh.mesh_terrains as mesh_terrains
-import omni.isaac.lab.terrains.trimesh.utils as mesh_utils_terrains
-from omni.isaac.lab.utils import configclass
+import isaaclab.terrains.trimesh.mesh_terrains as mesh_terrains
+import isaaclab.terrains.trimesh.utils as mesh_utils_terrains
+from isaaclab.utils import configclass
 
 from . import custom_terrains
 

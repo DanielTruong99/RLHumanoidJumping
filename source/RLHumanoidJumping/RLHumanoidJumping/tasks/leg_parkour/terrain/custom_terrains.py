@@ -5,10 +5,10 @@ import scipy.interpolate as interpolate
 from typing import TYPE_CHECKING
 
 import trimesh
-from omni.isaac.lab.terrains.trimesh import mesh_terrains_cfg
+from isaaclab.terrains.trimesh import mesh_terrains_cfg
 
 if TYPE_CHECKING:
-    from omni.isaac.lab.terrains.height_field import hf_terrains_cfg
+    from isaaclab.terrains.height_field import hf_terrains_cfg
     from . import custom_terrains_cfg
 
 def custom_box_terrain(

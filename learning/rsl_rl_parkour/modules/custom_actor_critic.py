@@ -3,21 +3,14 @@ import torch.nn as nn
 import sys
 
 from rsl_rl.modules import ActorCriticRecurrent
-from rsl_rl.modules.actor_critic import get_activation as get_activation_base
+from rsl_rl.utils import resolve_nn_activation
 
-def get_activation(act_name):
-    if act_name == "celu":
-        return nn.CELU()
-    else: 
-        return get_activation_base(act_name)
-    
-sys.modules['rsl_rl.modules.actor_critic'].get_activation = get_activation # type: ignore
 
 class EncoderActorCritic(ActorCriticRecurrent):
     def __init__(self, num_actor_obs, num_critic_obs, num_actions, **kwargs):
         #* get encoder configuration
         encoder_cfg = kwargs["encoder_cfg"]
-        activation = get_activation(encoder_cfg["activation"])
+        activation = resolve_nn_activation(encoder_cfg["activation"])
 
         #* get memory configuration
         memory_cfg = kwargs["memory_cfg"]

@@ -131,15 +131,18 @@ class LegPlanarWalkEnvCfg(DirectRLEnvCfg):
     episode_length_s = 5.0
     decimation = 2
     action_scale = 1.0
+    action_space = 10
     num_actions = 10
-    num_observations = 3 + 3 + 3 + 3 + 10 + 10 + 10 + 2 + 220 #! NEED TO BE CHANGED
+    num_observations = 3 + 3 + 3 + 3 + 10 + 10 + 10 + 2 + 220
+    observation_space = 3 + 3 + 3 + 3 + 10 + 10 + 10 + 2 + 220 #! NEED TO BE CHANGED
+    state_space = 0
     num_states = 0
 
     #* simulation
     sim: SimulationCfg = SimulationCfg(
         dt=0.005,
         render_interval=decimation,
-        disable_contact_processing=True,
+        # disable_contact_processing=True,
         physics_material=sim_utils.RigidBodyMaterialCfg(
             friction_combine_mode="multiply",
             restitution_combine_mode="multiply",
