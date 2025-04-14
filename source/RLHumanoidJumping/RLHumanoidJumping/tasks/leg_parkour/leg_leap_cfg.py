@@ -144,6 +144,13 @@ class LegLeapPlayEnvCfg(LegLeapEnvCfg):
         # self.commands.heading_control_stiffness = 0.15
 
         self.events.push_robot = None #type: ignore
+        # self.events.reset_robot_joints = None #type: ignore
+
+        self.commands.ranges_pos_x = (7.5, 7.5)
+        self.commands.ranges_pos_y = (1.5, 1.5)
+        self.commands.ranges_heading = (math.pi/4, math.pi/4)
+
+        self.curriculum = False
 
 
 

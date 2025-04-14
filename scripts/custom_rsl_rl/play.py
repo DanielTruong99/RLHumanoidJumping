@@ -48,6 +48,8 @@ import gymnasium as gym
 import os
 import time
 import torch
+import numpy as np
+import pandas as pd
 
 from rsl_rl.runners import OnPolicyRunner
 from learning.rsl_rl_parkour.runners import CustomOnPolicyRunner
@@ -140,6 +142,10 @@ def main():
     # reset environment
     obs, _ = env.get_observations()
     timestep = 0
+    recoreded_length = 5.0 / dt
+
+    positions = torch.zeros((int(recoreded_length), env.num_envs, 3), device=env.unwrapped.device)
+    is_dones = torch.zeros((env.num_envs,), device=env.unwrapped.device)
     # simulate environment
     while simulation_app.is_running():
         start_time = time.time()
@@ -148,7 +154,21 @@ def main():
             # agent stepping
             actions = policy(obs)
             # env stepping
-            obs, _, _, _ = env.step(actions)
+            obs, _, dones, _ = env.step(actions)
+
+        position = env.unwrapped._robot.data.root_pos_w 
+        positions[timestep] = position
+        is_dones += dones; is_dones[is_dones > 1.0] = 1.0
+
+        timestep += 1
+        if timestep == recoreded_length:
+            np_positions = positions.cpu().numpy()
+            np_is_dones = is_dones.cpu().numpy()
+            #save to npz file
+            np.savez("recorded_positions.npz", positions=np_positions, is_dones=np_is_dones)
+            print("Recorded positions saved to recorded_positions.csv")
+            break
+
         if args_cli.video:
             timestep += 1
             # Exit the play loop after recording one video

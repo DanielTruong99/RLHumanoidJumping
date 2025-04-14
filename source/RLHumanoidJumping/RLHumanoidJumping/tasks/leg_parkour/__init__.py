@@ -42,7 +42,7 @@ gym.register(
     entry_point=f"{__name__}.leg_leap:LegLeapEnv",
     disable_env_checker=True,
     kwargs={
-        "env_cfg_entry_point": f"{__name__}.leg_leap_cfg:LegLeapEnvCfg",
+        "env_cfg_entry_point": f"{__name__}.leg_leap_cfg:LegLeapPlayEnvCfg",
         "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:LegLeapPPOPlayRunnerCfg",
     },
 )
